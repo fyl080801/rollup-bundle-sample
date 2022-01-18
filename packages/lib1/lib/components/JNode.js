@@ -51,40 +51,37 @@ const JNode = defineComponent({
 
     const renderField = ref();
 
-    const renderSlots =
-      computed <
-      any >
-      (() => {
-        if (!renderField.value) {
-          return { scoped: {}, named: {} };
-        }
+    const renderSlots = computed(() => {
+      if (!renderField.value) {
+        return { scoped: {}, named: {} };
+      }
 
-        const { scoped, named } = renderField.value?.children
-          ?.filter((child) => child)
-          .reduce(
-            ({ scoped, named }, child) => {
-              if (child.scopedSlot) {
-                scoped[child.scopedSlot] = [...(scoped[child.scopedSlot] || []), child];
-              } else {
-                const slotName = child?.slot || "default";
-                named[slotName] = [...(named[slotName] || []), child];
-              }
-              return { scoped, named };
-            },
-            { scoped: {}, named: {} },
-          ) || { scoped: {}, named: {} };
+      const { scoped, named } = renderField.value?.children
+        ?.filter((child) => child)
+        .reduce(
+          ({ scoped, named }, child) => {
+            if (child.scopedSlot) {
+              scoped[child.scopedSlot] = [...(scoped[child.scopedSlot] || []), child];
+            } else {
+              const slotName = child?.slot || "default";
+              named[slotName] = [...(named[slotName] || []), child];
+            }
+            return { scoped, named };
+          },
+          { scoped: {}, named: {} },
+        ) || { scoped: {}, named: {} };
 
-        return {
-          scoped: Object.keys(scoped).map((key) => ({
-            name: key,
-            children: scoped[key],
-          })),
-          named: Object.keys(named).map((key) => ({
-            name: key,
-            children: named[key],
-          })),
-        };
-      });
+      return {
+        scoped: Object.keys(scoped).map((key) => ({
+          name: key,
+          children: scoped[key],
+        })),
+        named: Object.keys(named).map((key) => ({
+          name: key,
+          children: named[key],
+        })),
+      };
+    });
 
     const isDom = computed(() => {
       return isOriginTag(renderField.value?.component);

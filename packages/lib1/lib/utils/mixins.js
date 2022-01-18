@@ -1,4 +1,4 @@
-import { inject, provide, onBeforeUnmount, watch } from "@vue/composition-api";
+import { inject, provide, onBeforeUnmount, onMounted, watch } from "@vue/composition-api";
 import { deepClone, isArray, isFunction } from "./helper";
 import { createServiceProvider, globalServiceProvider, mergeServices } from "./service";
 

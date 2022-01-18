@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { rollups } = require("../../build");
 
 const configs = {

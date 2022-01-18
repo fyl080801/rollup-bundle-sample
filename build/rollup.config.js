@@ -4,14 +4,14 @@ const {
   commonjs,
   nodeResolve,
   // typescript,
-  terser,
+  // terser,
   vuePlugin,
-  sizes,
+  // sizes,
   // scss,
   // postcss,
 } = require("./rollup.plugins");
 const { helperGlobal } = require("./runtime.helper");
-const { path, assignObject, assignArray } = require("./utils");
+const { assignObject, assignArray } = require("./utils");
 
 const commonGlobal = {
   vue: "Vue",
@@ -34,7 +34,7 @@ const defaultPlugins = [
         {
           useBuiltIns: "usage",
           targets: "> 0.25%, IE >= 11",
-          corejs: 2,
+          corejs: 3,
         },
       ],
     ],
